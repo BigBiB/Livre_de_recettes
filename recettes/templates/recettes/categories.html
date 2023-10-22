@@ -1,0 +1,17 @@
+{% extends 'livre_recettes/base.html' %}
+
+{% block categories %}
+    <div><h2>Catégories</h2></div>
+
+    <div class="categ">
+
+        {% for c in liste_cat %}
+            <p>{{ c.id }} ---- {{ c.name }}</p>
+
+            {#            {% for r in liste_recettes %}#}
+
+        {% endfor %}
+
+    </div>
+
+{% endblock categories %}

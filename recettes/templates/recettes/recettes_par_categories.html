@@ -1,0 +1,16 @@
+{% extends 'livre_recettes/base.html' %}
+
+{% block recettes_par_categorie %}
+    <div class="container">
+        <section>
+            <div>
+
+                <h3>{{ ma_categorie }}</h3>
+                {% for r in mes_recettes %}
+                    <p><a href="{% url 'recette' r.slug cat_id %}">{{ r.nom }}</a></p>
+                {% endfor %}
+
+            </div>
+        </section>
+    </div>
+{% endblock recettes_par_categorie %}

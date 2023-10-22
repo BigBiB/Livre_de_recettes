@@ -1,0 +1,20 @@
+{% extends 'livre_recettes/base.html' %}
+
+
+{% block recettes %}
+    <div class="container">
+        <section>
+            <h3>{{ rcat }}</h3>
+
+            <h1>{{ rnom }}</h1>
+
+            <img class="img_recette_index"
+                 src="../../../static/img/img_recettes/{{ rimage }}">
+
+            <p>
+                {{ rrecette|linebreaks }}
+            </p>
+
+        </section>
+    </div>
+{% endblock recettes %}

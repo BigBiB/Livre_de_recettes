@@ -1,0 +1,49 @@
+{% extends 'livre_recettes/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <section>
+
+            <div class="row">
+{#                <div class="categorie_columns col-3 ">#}
+{#                    <!--<p class="titre_cat mb-0"><em>Catégories</em></p>-->#}
+{#                    {% for c in liste_cat %}#}
+{##}
+{#                        <p class="col_cat">#}
+{#                    <span><img src="https://img.icons8.com/ios/50/000000/hand-right.png" alt="..."#}
+{#                               class="border-0 img_col_cat">#}
+{##}
+{#                    </span>#}
+                            {#<a href="{% url 'voir_recettes_par_categories'%}{{ c.id }}">{{ c.name }}</a>#}
+{#                            <a href="{% url 'voir_recettes_par_categories' c.id %} ">{{ c.name }}</a>#}
+{#                        </p>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+
+            <div>
+                {% for recettes in recette_liste %}
+                    <ul>
+                {{ recettes.nom }}
+                    </ul>
+                {%  endfor %}
+            </div>
+
+                <div class="col-9">
+                {# TODO Liste des blocks #}
+                {% block body %}{% endblock body %}
+                {% block recette %}{% endblock recette %}
+                {% block recherche %}{% endblock recherche %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+    {#    <div>#}
+    {#        {% for r in liste_recettes %}#}
+    {#            <p>{{ r.id }} ---- <a href="../recette{{ r.id }}">{{ r.nom }}</a></p>#}
+    {#        {% endfor %}#}
+    {#    </div>#}
+
+{% endblock content %}
