@@ -1,0 +1,65 @@
+{% extends "livre_recettes/base.html" %}
+
+{% block create %}
+
+
+    <h1>Ajout de recette...</h1>
+
+    <br/><br/>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row col-md-12">
+            <div class="form-group col-md-5">
+                <label for="">Catégorie</label>
+                <br>
+                {{ form2.category }}
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Titre</label>
+                <br>
+                {{ form2.name }}
+            </div>
+        </div>
+<div class="row col-md-12" style="padding-top: 1em;">
+        <div class="form-group col-md-5">
+            <label for="">Ingrédients</label>
+            <br>
+            {{ form2.ingredient }}
+        </div>
+        <div class="form-group col-md-5">
+            <label for="">Préparation</label>
+            <br>
+            {{ form2.recipe }}
+        </div>
+</div>
+        <div class="row col-md-12" style="padding-top: 1em;">
+        <div class="form-group col-md-5">
+            <label for="">Note</label>
+            <br>
+            {{ form2.note }}
+        </div>
+
+        <div class="form-group" style="padding-top: 1em;">
+            <label for="">Photo locale</label>
+            <br>
+            {{ form2.picture }}
+        </div>
+        <div class="form-group" style="padding-top: 1em;">
+            <label for="">Photo externe (url)</label>
+            <br>
+            {{ form2.url_picture }}
+        </div>
+        <div class="form-group" style="padding-top: 1em;">
+            <label for="">Source</label><br>
+            {{ form2.url_recipe }}
+        </div>
+        <br>
+        </div>
+<div style="padding-top: 1em;">
+        <button type="submit" class="btn btn-success">Ajouter</button>
+</div>
+    </form>
+</div>>
+{% endblock create %}

@@ -1,0 +1,89 @@
+{% extends "livre_recettes/base.html" %}
+{#https://codepen.io/Bahae/pen/ZEYbKVm#}
+{% load static %}
+{% block content %}
+
+    <div class="row p-4">
+        <div class="col-sm-12 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    Recherche
+                </div>
+                <form action="{% url 'recettes' %}" method="post">
+                    <div class="card-body">
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <div class="text-right">
+                            <button class="btn btn-info" type="submit">
+                                <i class="fa fa-search" aria-hidden="true"></i>Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="table-responsive-sm p-4">
+
+
+        {#      <table class="table table-sm">#}
+        {#            <thead>#}
+        {#            <tr>#}
+        {#                <th scope="col">ID</th>#}
+        {#                <th scope="col">Nom</th>#}
+        {#                <th scope="col">Catégorie</th>#}
+        {#            </tr>#}
+        {#            </thead>#}
+        {#            <tbody>#}
+        {#            {% for rec in rec_list %}#}
+        {#                <tr class="table-info">#}
+        {#                    <td>{{ rec.id }}</td>#}
+        {#                    <td>{{ rec.name }}</td>#}
+        {#                    <td>{{ rec.category }}</td>#}
+        {#                </tr>#}
+        {#            {% endfor %}#}
+        {#            </tbody>#}
+        {#        </table>#}
+
+
+        <div class="row">
+            {% for r in rec_list %}
+                <div class="col-sm-2 border cellule">
+
+                    <div>
+                        <a href="rec/{{ r.id }}">
+                            <img src="{% static 'img/img_recettes/' %}{{ r.picture }}"
+                                 class="cellule_picture rounded-3  mx-auto d-block shadow shadow-offset-left-md shadow-offset-down-sm"
+                                 alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="rec/{{ r.id }}">{{ r.name }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <div class="pagination">
+            {% if rec_list.has_previous %}
+                <a href="{% url 'recettes' %}?p={{ rec_list.previous_page_number }}"> Précédente</a>
+            {% endif %}
+
+            <span class="current">
+             &nbsp;&nbsp;Page {{ rec_list.number }} sur {{ rec_list.paginator.num_pages }}&nbsp;
+            </span>
+
+            {% if rec_list.has_next %}
+                &nbsp; <a href="{% url 'recettes' %}?p={{ rec_list.next_page_number }}">Suivante </a>
+                &nbsp;&nbsp; <a href="{% url 'recettes' %}?p={{ rec_list.paginator.num_pages }}">Dernière </a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock content %}

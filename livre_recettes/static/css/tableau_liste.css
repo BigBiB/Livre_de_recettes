@@ -1,0 +1,61 @@
+li a{
+    text-decoration: none;
+}
+.cellule {
+    display: flex;
+    flex-direction: column;
+    background-color: #eaf0fc;
+    border-color: gainsboro;
+
+}
+
+.cellule a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #2f2d2d;
+}
+
+
+.cellule_picture {
+    width: 95%;
+    margin-top: 1.2rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d9cfcf;
+}
+.card{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /*    border-width: 1px;*/
+    /*border-style: solid;*/
+    /*color: gray;*/
+
+}
+.card img{
+    width:100%
+}
+.card_ingred{
+    margin-bottom: 0.7rem;
+    /*background-color: #eaf0fc;*/
+
+}
+.card_ingred span{
+    margin-left: 20px;
+    margin-top: -0.3rem;
+    padding-top: 1rem;
+}
+
+.ingred{
+    margin-top: 2rem;
+}
+
+.img_detail_cellule {
+    padding: 0.3rem;
+    width: 100%;
+}
+
+
+
+footer {
+    /*padding-top: 2rem;*/
+    margin-top: 4rem;
+}

@@ -19,10 +19,12 @@ from django.urls import path, include
 
 from .views import index
 
+
 urlpatterns = [
-    # path('', index, name="livre_recettes-index"),
+
     path('', index, name="accueil_page"),
-    path('rec/', include("recettes.urls")),
+    path('recettes/', include("recettes.urls")),
     path('admin/', admin.site.urls),
+    path('accounts/', include("django.contrib.auth.urls")),
 
 ]

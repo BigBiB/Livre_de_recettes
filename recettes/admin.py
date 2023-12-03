@@ -8,8 +8,10 @@ from .models import BlogRecettes, Category
 @admin.register(BlogRecettes)
 class BlogRecettesAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "name",
-        "slug",
+        "category",
+        # "slug",
         "author",
     )
     empty_value_display = "Inconnu"
@@ -20,5 +22,5 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "name",
-        "slug",
+        # "slug",
     )

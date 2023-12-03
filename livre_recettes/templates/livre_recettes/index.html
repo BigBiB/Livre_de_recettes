@@ -1,3 +1,4 @@
+{#{% extends "livre_recettes/base.html" %}#}
 {% load static %}
 <!DOCTYPE html>
 <html lang="fr">
@@ -7,13 +8,18 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+{#{% block index %}#}
+
+
 <div class="container">
     <h1>Bienvenue sur mon site {{ prenom }} {{ nom }}</h1>
     <h2>Nous sommes le {{ date|date:"d F Y" }}</h2>
-    <h3>et il est actuellement {{ date|date:"H\hi \e\t s \s\e\c" }}</h3>
+{#    <h3>et il est actuellement {{ date|date:"H\hi \e\t s \s\e\c" }}</h3>#}
     {#    <h3><a href="recettes/liste">Entrez dans votre livre</a></h3>#}
 {#    <h3><a href="rec">Entrez dans votre livre</a></h3>#}
-    <h3><a href="{%  url 'recettes-index' %}">Toutes mes recettes</a></h3>
+    <h3><a href="{%  url 'home' %}">Toutes mes recettes</a></h3>
 </div>
+
+{#{% endblock index %}#}
 </body>
 </html>

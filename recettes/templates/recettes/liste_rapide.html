@@ -1,0 +1,32 @@
+{% extends "livre_recettes/base.html" %}
+
+{% load filtre_perso %}
+{% load static %}
+{% block content %}
+
+
+
+    <section class="py-4" style="margin-left: 4rem">
+        {% regroup rec_list by name|first_letters as Newlist %}
+        {% for x in Newlist %}
+            <div class="">
+                <h3 style="margin-bottom: 1rem">{{ x.grouper }}</h3>
+
+                {% for y in x.list %}
+                    <p style="margin-top: -1rem"><a class="text-decoration-none text-dark ms-4" href="r{{ y.id }}">{{ y.name }}</a></p>
+
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+
+    </section>
+
+
+
+
+
+
+
+
+{% endblock content %}

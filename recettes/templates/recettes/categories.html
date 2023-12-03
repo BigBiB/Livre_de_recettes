@@ -1,17 +1,70 @@
-{% extends 'livre_recettes/base.html' %}
+{% extends "livre_recettes/base.html" %}
 
-{% block categories %}
-    <div><h2>Catégories</h2></div>
+{% load static %}
 
-    <div class="categ">
+{% block content %}
 
-        {% for c in liste_cat %}
-            <p>{{ c.id }} ---- {{ c.name }}</p>
+{#    {% for c in cat_list %}#}
+{#<h1>{{ c.name }}</h1>#}
+{#        {% for r in rec_list %}#}
+{##}
+{#            {% if c.id == r.category_id %}#}
+{#                #}
+{#                <p><a class="text-decoration-none" href="../../{{r.id}}"> {{ r.name }} </a></p>#}
 
-            {#            {% for r in liste_recettes %}#}
 
-        {% endfor %}
+{#          <div class="row m-0">#}
+{#            {% for c in cate_list %}#}
+{#                <h1>{{ c.name }}</h1>#}
+{#                 {% for r in rec_list %}#}
+{#                <p><a class="text-decoration-none" href="../../{{r.id}}"> {{ r.name }} </a></p>#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#          </div>#}
 
-    </div>
 
-{% endblock categories %}
+
+
+     <!-- Section-->
+        <section class="py-4">
+            <div class="container-fluid px-4 px-lg-6 mt-5">
+                <div class="row gx-4 gx-lg-2 row-cols-2 row-cols-md-4 row-cols-xl-6 justify-content-left">
+
+            {% for r in rec_list %}
+                    <div class="col mb-4" style="cursor: pointer;" onclick="window.location=' ../r{{ r.id }}'">
+                        <div class="card h-100 m-0" style="border-top-left-radius: 3rem; border-top-right-radius: 1rem; ">
+                            <!-- Product image-->
+{#                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />#}
+                            <img class="card-img-top " style="border: 0px solid #ddd; padding: 5px; height: 12rem; border-top-left-radius: 3rem; border-top-right-radius: 1rem; " src="{% static 'img/img_recettes/' %}{{ r.picture }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-1" style="background-color:dimgray">
+                                <div class="text-center" style="color:#ece3e3">
+                                    <!-- Product name-->
+                                    <p class="fs-6">{{ r.name }}</p>
+                                    <!-- Product price-->
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+{#                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">#}
+{#                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="rec/{{ r.id }}">Voir la recette</a></div>#}
+{#                            </div>#}
+                        </div>
+                    </div>
+            {% endfor %}
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+{##}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{##}
+{#    {% endfor %}#}
+
+{% endblock %}
+

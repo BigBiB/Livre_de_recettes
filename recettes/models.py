@@ -6,7 +6,8 @@ from autoslug import AutoSlugField
 
 class Category(models.Model):
     name = models.CharField(max_length=36)
-    slug = AutoSlugField(populate_from='name', unique=True, max_length=50)
+    # slug = AutoSlugField(populate_from='name', unique=True, max_length=50)
+
     # slug = models.SlugField()
 
     def __str__(self):
@@ -15,10 +16,11 @@ class Category(models.Model):
 
 class BlogRecettes(models.Model):
     name = models.CharField(max_length=100, blank=False)
-    # slug = models.SlugField(unique=True, max_length=100)
-    description = models.TextField(blank=False)
-    slug = AutoSlugField(populate_from='name', unique=True, max_length=100)
-    tag = models.TextField(max_length=200, blank=True)
+    recipe = models.TextField(blank=False, null=True)
+    ingredient = models.TextField(blank=False, null=True)
+    note = models.TextField(blank=True, null=True)
+    # slug = AutoSlugField(populate_from='name', unique=True, max_length=100)
+    # tag = models.TextField(max_length=200, blank=True)
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
     picture = models.CharField(max_length=200, blank=True)
     url_picture = models.URLField(max_length=200, blank=True)
@@ -33,7 +35,8 @@ class BlogRecettes(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        # if not self.slug:
+        #     self.slug = slugify(self.name)
 
         super().save(*args, **kwargs)
+

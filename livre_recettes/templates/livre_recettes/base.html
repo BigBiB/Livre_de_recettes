@@ -1,79 +1,146 @@
-{% load static %}
-
 <!doctype html>
 <html lang="fr">
+{% load static %}
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    {#<link href="css/styles.css" rel="stylesheet" />#}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {#    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,100;0,300;1,100&display=swap" rel="stylesheet">#}
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-    <title>{% block titre %} Mes recettes {% endblock titre %}</title>
+    <link rel="stylesheet" href="{% static 'css/tableau_liste.css' %}">
+
+
+    <title>Mes recettes</title>
 </head>
 <body>
 
-{#  ****************************************************************  #}
-<div id="sidebar">
-    {% block sidebar %}
 
-        <div class="container-fluid  ">
+<div class="sidebar-container">
+    {#    <div class="sidebar-logo">#}
+    {#        <a href="{% url 'home' %}">#}
+    {#        Les recettes de J-P#}
+    {#        </a>#}
+    {#    </div>#}
+    <ul class="sidebar-navigation">
+        <li class="header">Navigation</li>
+        <li class="{% if selected == 'home' %} active {% endif %}">
+            <a href="{% url 'home' %}">
+                <i class="fa fa-home" aria-hidden="true"></i> Accueil
+            </a>
+        </li>
+        <li class="{% if selected == 'recettes' %} active {% endif %}">
+            <a href="{% url 'recettes' %}">
+                <i class="fa fa-users" aria-hidden="true"></i> Recettes
+            </a>
+        </li>
+        <li class="{% if selected == 'recettes_rapide' %} active {% endif %}">
+            <a href="{% url 'recettes_rapide' %}">
+                <i class="fa fa-users" aria-hidden="true"></i> Liste rapide
+            </a>
+        </li>
+            {% if user.is_superuser %}
+            <li class="{% if selected == 'recettes' %} active {% endif %}">
+                <a href="{% url 'ajout_recette' %}">
+                    <i class="fa fa-users" aria-hidden="true"></i> Ajouter une recette
+                </a>
+            </li>
+        {% endif %}
+        {% if user.is_superuser %}
+            <li class="{% if selected == 'recettes' %} active {% endif %}">
+                <a href="{% url 'admin:index' %}">
+                    <i class="fa fa-users" aria-hidden="true"></i> Administration
+                </a>
+            </li>
+        {% endif %}
+        <li class="header">Mon compte</li>
+        <li>
+            <a href="{% url 'logout' %}">
+                <i class="fa fa-users" aria-hidden="true"></i> Déconnexion
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'password_change' %}">
+                <i class="fa fa-info-circle" aria-hidden="true"></i> Changer de mot de passe
+            </a>
+        </li>
+    </ul>
+</div>
 
-            <header>
-                <div class="row">
-                    <div><p class="titre_index"><a href="{% url 'accueil_page' %}">Livre de recettes</a></p>
-                    </div>
 
+<div class="content-container">
+{#{% url 'ajout_recette' as url %}#}
+    {% if form1 %}
+        <div class="col-offset-9 float-end form-outline" style="margin-right: 1.3em; margin-top:0.5em;">
+            <form class="" action="{% url 'recettes' %}" method="post" id="recherche_form">
+                {% csrf_token %}
+                {{ form1 }}
+                <button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    {% endif %}
+    <div class="container-fluid" style="padding-bottom: 7em">
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-4 my-1">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Mon livre de cuisine</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">...</p>
                 </div>
-            </header>
+            </div>
+        </header>
 
-            <nav class="navbar navbar-expand-lg ">
-                <div class="collapse navbar-collapse" id="navbarText">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active text-muted">
-                            <a class="nav-link" href="{% url 'recettes-index' %}"><img class="icone_home"
-                                                                                       src="https://img.icons8.com/wired/64/000000/home.png"/></a>
-                        </li>
-                    </ul>
-                    <span class="navbar-text">
-                        <form action="../recherche/" method="POST">
-                    <input class="recherche" type="text" name="search_id" id="search_id" placeholder="Search.."
-                           required>
-                    <button class="btn_search" type="submit"><img
-                            src="https://img.icons8.com/wired/64/000000/search-property.png"/></button>
-                        </form>
-                    </span>
-                    {#                    <span class="navbar-text">#}
-                    {#                <a class="nav-link" href="../ajout"><img class="icone_ajout"#}
-                    {#                                                         src="https://img.icons8.com/wired/64/000000/add-list.png"/></a>#}
-                    {#            </span>#}
+
+        <div class="row m-0">
+            {% for c in cate_list %}
+                <div class="col-auto px-0">
+                    <a href="{% url 'categories' c.id %}"
+                       class="btn btn-success py-2 px-3 m-2 p-2 text-decoration-none text-white">{{ c.name }}
+                    </a>
                 </div>
-            </nav>
+            {% endfor %}
+
+
         </div>
 
-    {% endblock sidebar %}
-</div>
 
-{#  ****************************************************************  #}
-{% block recette_not_found %}
-{% endblock %}
-<div class="content" id="content">
-    {% block list_recipe %}
-        hghgfh
-    {% endblock list_recipe %}
-{#    {% block categories %}#}
-{#    {% endblock categories %}#}
-    {% block recettes %}
-    {% endblock recettes %}
-    {% block recettes_par_categorie %}
-    {% endblock recettes_par_categorie %}
+        {% block content %}{% endblock content %}
+        {% block index %}{% endblock index %}
+        {% block create %}{% endblock create  %}
 
-</div>
 
-{#  ****************************************************************  #}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        {#    </div>#}
+        {#</div>#}
+
+
+        <footer class="fixed-bottom bg-light text-center text-lg-start ">
+            <!-- Copyright -->
+            <div class="row text-left p-3" style="background-color: rgba(0, 0, 0, 0.2); font-size: 0.9rem;">
+                <div class="col-3"> © 2023 Copyright:
+                    <a class="text-dark" href="">JPA</a>
+                </div>
+                <div class="col col-offset76 "></div>
+                {% if total %}
+                    <div class="col-1 bg-danger">total de recettes: {{ total }}</div>
+                {% endif %}
+
+
+            </div>
+
+            <!-- Copyright -->
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+
 </body>
 </html>

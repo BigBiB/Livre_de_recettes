@@ -1,0 +1,91 @@
+{% extends "livre_recettes/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col-7">
+                <div class="card-header">
+                    <h1>{{ object.name }}</h1>
+
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="btn btn-primary py-2 px-3 m-2 p-2 text-decoration-none text-white"
+                     onclick="window.location=' {% url 'categories' object.category.id %}'">
+                    <span>{{ object.category.name }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="ingred card-header">
+                    Ingrédients
+                </div>
+                <div class="card_ingred" style="padding-top:0;">
+                    <span style="font-size: 0.85rem; ">{{ object.ingredient|linebreaks|urlize }}</span>
+                </div>
+
+            </div>
+            {% if object.picture %}
+                <div class=" col-2">
+                    <div class="card mx-auto d-block">
+                        <img src="{% static 'img/img_recettes/' %}{{ object.picture }}" alt=""
+                             class="card-img-top img_detail_cellule shadow-lg ">
+                    </div>
+                </div>
+            {% endif %}
+            {% if object.url_picture %}
+                <div class=" col-2">
+                    <div class="card mx-auto d-block">
+                        <img src="{{ object.url_picture }}" alt=""
+                             class="card-img-top img_detail_cellule shadow-lg ">
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class=" col-8">
+                <div class="ingred card-header">
+                    Préparation
+                </div>
+                <div class="card_ingred" style="padding-top: 0rem;">
+                    <span style="font-size: 0.85rem">{{ object.recipe|linebreaks|urlize }}</span>
+                </div>
+            </div>
+        </div>
+        {% if object.note %}
+            <div class="row">
+                <div class="card col-8">
+                    <div style="margin-top: 1em;">
+                        <h6 class="card-title"><u>Note</u></h6>
+                    </div>
+                    <div class="card-text">
+                        <span style="font-size: 0.9rem">{{ object.note|linebreaks|urlizetrunc:26 }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <hr class="col-8 border border-primary border-1 opacity-50">
+
+        {% if object.url_recipe %}
+            <div class="row">
+                <div class="col-10 " style="margin-top: 1em;">
+                    <span class="lh-1"> Source: <a style="text-decoration: none; font-size: .9rem"
+                                                   href="{{ object.url_recipe }}">{{ object.url_recipe }}</a></span>
+                </div>
+
+            </div>
+        {% endif %}
+    </div>
+
+
+
+
+{% endblock content %}
