@@ -47,7 +47,7 @@
                 <i class="fa fa-users" aria-hidden="true"></i> Liste rapide
             </a>
         </li>
-            {% if user.is_superuser %}
+        {% if user.is_superuser %}
             <li class="{% if selected == 'recettes' %} active {% endif %}">
                 <a href="{% url 'ajout_recette' %}">
                     <i class="fa fa-users" aria-hidden="true"></i> Ajouter une recette
@@ -77,7 +77,7 @@
 
 
 <div class="content-container">
-{#{% url 'ajout_recette' as url %}#}
+    {#{% url 'ajout_recette' as url %}#}
     {% if form1 %}
         <div class="col-offset-9 float-end form-outline" style="margin-right: 1.3em; margin-top:0.5em;">
             <form class="" action="{% url 'recettes' %}" method="post" id="recherche_form">
@@ -100,10 +100,11 @@
 
 
         <div class="row m-0">
-            {% for c in cate_list %}
+            {% for c in cate_list|dictsort:"name" %}
                 <div class="col-auto px-0">
                     <a href="{% url 'categories' c.id %}"
-                       class="btn btn-success py-2 px-3 m-2 p-2 text-decoration-none text-white">{{ c.name }}
+                       class="btn btn-success py-2 px-3 m-2 p-2 text-decoration-none text-white">
+                        {{ c.name }}
                     </a>
                 </div>
             {% endfor %}
@@ -114,7 +115,7 @@
 
         {% block content %}{% endblock content %}
         {% block index %}{% endblock index %}
-        {% block create %}{% endblock create  %}
+        {% block create %}{% endblock create %}
 
 
         {#    </div>#}
