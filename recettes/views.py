@@ -1,3 +1,4 @@
+import random
 from urllib.parse import urlencode
 
 from django.contrib.auth.decorators import login_required

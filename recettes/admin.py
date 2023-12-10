@@ -8,19 +8,16 @@ from .models import BlogRecettes, Category
 @admin.register(BlogRecettes)
 class BlogRecettesAdmin(admin.ModelAdmin):
     list_display = (
-        "id",
+
         "name",
         "category",
-        # "slug",
         "author",
+        "id",
     )
     empty_value_display = "Inconnu"
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "name",
-        # "slug",
-    )
+    list_display = ("name", "id", )
+    ordering = ("name", "id",)
